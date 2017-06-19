@@ -19,7 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'],function() {
+Route::group([
+    'prefix' => 'admin',
+    'as' => 'admin.',
+    'middleware' => 'can:admin'
+],function() {
     Route::get('/', function () {
         return "Área Admin";
 //        return view('welcome');
