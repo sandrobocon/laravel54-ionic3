@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.'],function() {
+    Route::get('/', function () {
+        return "Área Admin";
+//        return view('welcome');
+    });
+});
+
+Route::get('/force-login',function(){
+   \Auth::loginUsingId(1);
+});
