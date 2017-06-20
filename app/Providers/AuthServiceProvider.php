@@ -2,7 +2,7 @@
 
 namespace CodeFlix\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use CodeFlix\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
