@@ -2,10 +2,10 @@
 
 namespace CodeFlix\Http\Controllers\Admin\Auth;
 
-use CodeFlix\Http\Controllers\Auth\Request;
-use CodeFlix\Http\Controllers\Auth\User;
 use CodeFlix\Http\Controllers\Controller;
+use CodeFlix\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/dashboard';
 
     /**
      * Create a new controller instance.
