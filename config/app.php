@@ -167,7 +167,8 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        \Bootstrapper\BootstrapperL5ServiceProvider::class,
+        Bootstrapper\BootstrapperL5ServiceProvider::class,
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -227,6 +228,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Table' => Bootstrapper\Facades\Table::class,
+        'Icon' => \Bootstrapper\Facades\Icon::class,
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
     ],
 
 ];
