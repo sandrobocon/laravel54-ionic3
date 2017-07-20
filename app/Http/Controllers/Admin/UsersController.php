@@ -6,6 +6,7 @@ use CodeFlix\Forms\UserForm;
 use CodeFlix\Models\User;
 use Illuminate\Http\Request;
 use CodeFlix\Http\Controllers\Controller;
+use Kris\LaravelFormBuilder\Form;
 
 class UsersController extends Controller
 {
@@ -43,7 +44,19 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /** @var Form $form */
+        $form = \FormBuilder::create(UserForm::class);
+
+        if(!$form->isValid()){
+            // Redir pg criação user
+        }
+
+        $data = $form->getFieldValues();
+        $data['role'] = User::ROLE_ADMIN;
+        $data['password'] = User::generatePassword();
+        User::create($data);
+        $request->session()->flash('message', 'Usuário Criado com sucesso.');
+        return redirect()->route('admin.users.index');
     }
 
     /**

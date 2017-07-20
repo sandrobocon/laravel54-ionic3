@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <h3>Nome usuário</h3>
-            <?php $icon = Icon::create('flopp-disk'); ?>
+            <?php $icon = Icon::create('floppy-disk'); ?>
             {!!
                 form($form->add('salve', 'submit', [
                     'attr' => ['class' => 'btn btn-primary btn-block'],
