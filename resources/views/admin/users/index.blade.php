@@ -11,7 +11,9 @@
                 Table::withContents($users->items())->striped()
                 ->callback('Ações', function($field, $user){
                     $linkEdit = route('admin.users.edit', ['user' => $user->id]);
-                    return Button::link(Icon::create('pencil'))->asLinkTo($linkEdit);
+                    $linkShow = route('admin.users.show', ['user' => $user->id]);
+                    return Button::link(Icon::create('pencil'))->asLinkTo($linkEdit).'|'.
+                        Button::link(Icon::create('remove'))->asLinkTo($linkShow);
                 })
              !!}
         </div>

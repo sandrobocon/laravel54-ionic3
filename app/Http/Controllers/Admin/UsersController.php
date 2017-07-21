@@ -70,7 +70,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -126,6 +126,8 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        \Session::flash('message', 'Usuário removido com sucesso.');
+        return redirect()->route('admin.users.index');
     }
 }
