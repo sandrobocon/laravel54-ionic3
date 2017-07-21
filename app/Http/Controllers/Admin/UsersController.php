@@ -48,7 +48,10 @@ class UsersController extends Controller
         $form = \FormBuilder::create(UserForm::class);
 
         if(!$form->isValid()){
-            // Redir pg criação user
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         $data = $form->getFieldValues();
@@ -78,7 +81,13 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $form = \FormBuilder::create(UserForm::class, [
+            'url' => route('admin.users.update', ['user' => $user->id]),
+            'method' => 'PUT',
+            'model' => $user
+        ]);
+
+        return view('admin.users.edit',compact('form'));
     }
 
     /**
@@ -90,7 +99,23 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        /** @var Form $form */
+        $form = \FormBuilder::create(UserForm::class, [
+            'data' => ['id' => $user->id]
+        ]);
+
+        if(!$form->isValid()){
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
+        }
+
+        $data = array_except($form->getFieldValues(), ['password','role']);
+        $user->fill($data);
+        $user->save();
+        $request->session()->flash('message', 'Usuário alterado com sucesso.');
+        return redirect()->route('admin.users.index');
     }
 
     /**
