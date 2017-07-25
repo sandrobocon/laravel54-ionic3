@@ -12,12 +12,14 @@ class CreateUserAdminData extends Migration
      */
     public function up()
     {
-        User::create([
+        $model = User::create([
             'name' => env('ADMIN_DEFAULT_NAME', 'Administrador'),
             'email' => env('ADMIN_DEFAULT_EMAIL', 'admin@user.com'),
             'password' => bcrypt(env('ADMIN_DEFAULT_PASSWORD', 'secret')),
             'role' => User::ROLE_ADMIN
         ]);
+        $model->verified = true;
+        $model->save();
     }
 
     /**

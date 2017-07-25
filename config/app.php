@@ -170,6 +170,7 @@ return [
         Bootstrapper\BootstrapperL5ServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Jrean\UserVerification\UserVerificationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -235,6 +236,7 @@ return [
         'Navbar' => \Bootstrapper\Facades\Navbar::class,
         'Navigation' => \Bootstrapper\Facades\Navigation::class,
         'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
     ],
 
 ];
