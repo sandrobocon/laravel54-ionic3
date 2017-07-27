@@ -27,6 +27,7 @@
             if(Auth::check()){
                 $arrayLinks = [
                     ['link' => route('admin.users.index'),'title'=>'Usuários'],
+                    ['link' => route('admin.categories.index'),'title'=>'Categorias'],
                 ];
                 $menus = Navigation::links($arrayLinks);
                 $lotout = Navigation::links([
