@@ -30,10 +30,14 @@
                     ['link' => route('admin.categories.index'),'title'=>'Categorias'],
                 ];
                 $menus = Navigation::links($arrayLinks);
-                $lotout = Navigation::links([
+                $menuRight = Navigation::links([
                     [
                         Auth::user()->name,
                         [
+                            [
+                                'link' => route('admin.user_settings.edit'),
+                                'title' => 'Configurações',
+                            ],
                             [
                                 'link'=>route('admin.logout'),
                                 'title'=>'Logout',
@@ -44,7 +48,7 @@
                         ]
                     ]
                 ])->right();
-                $navbar->withContent($menus)->withContent($lotout);
+                $navbar->withContent($menus)->withContent($menuRight);
             }
         ?>
         {!! $navbar !!}
