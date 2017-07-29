@@ -14,6 +14,15 @@ use CodeFlix\Validators\VideoValidator;
  */
 class VideoRepositoryEloquent extends BaseRepository implements VideoRepository
 {
+    public function update(array $attributes, $id)
+    {
+        $model = parent::update($attributes,$id);
+        if(isset($attributes['categories'])) {
+            $model->categories()->sync($attributes['categories']);
+        }
+        return $model;
+    }
+
     /**
      * Specify Model class name
      *
