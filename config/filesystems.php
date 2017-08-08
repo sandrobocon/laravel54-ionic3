@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => env('STORAGE_DRIVER','videos_local'),
 
     /*
     |--------------------------------------------------------------------------
