@@ -5,7 +5,6 @@ namespace CodeFlix\Media;
 
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\UploadedFile;
-use Imagine\Image\Box;
 
 trait ThumbUploads
 {
@@ -27,8 +26,7 @@ trait ThumbUploads
         $storage = $model->getStorage();
         $thumbFile = $model->thumb_path;
         $format = \Image::format($thumbFile);
-        $thumbnailSmall = \Image::open($thumbFile)
-            ->thumbnail(new Box(64,36));
+        $thumbnailSmall = \Image::thumbnail($thumbFile, 64, 36);
         $storage->put($model->thumb_small_relative,$thumbnailSmall->get($format));
     }
 
@@ -45,7 +43,7 @@ trait ThumbUploads
     {
         /** @var FilesystemAdapter $storage */
         $storage = $model->getStorage();
-        if($storage->exists($model->thumb_relative) && $model->thumb != env('SERIE_NO_THUMB')){
+        if($storage->exists($model->thumb_relative) && $model->thumb != $model->thumb_default){
             $storage->delete([$model->thumb_relative, $model->thumb_small_relative]);
         }
     }

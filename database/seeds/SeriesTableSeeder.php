@@ -13,8 +13,6 @@ class SeriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $rootPath = config('filesystems.disks.videos_local.root');
-        \File::deleteDirectory($rootPath, true);
         /** @var Collection $series */
         $series = factory(\CodeFlix\Models\Serie::class,5)->create();
         $repository = app(SerieRepository::class);
@@ -30,6 +28,14 @@ class SeriesTableSeeder extends Seeder
             new \Illuminate\Http\UploadedFile(
                 storage_path('app/files/faker/thumbs/thumb_teste1.jpg'),
                 'thumb_teste1.jpg'
+            ),
+            new \Illuminate\Http\UploadedFile(
+                storage_path('app/files/faker/thumbs/thumb_teste2.jpg'),
+                'thumb_teste2.jpg'
+            ),
+            new \Illuminate\Http\UploadedFile(
+                storage_path('app/files/faker/thumbs/thumb_teste3.png'),
+                'thumb_teste3.jpg'
             )
         ]);
     }

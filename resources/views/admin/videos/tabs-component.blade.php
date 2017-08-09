@@ -11,7 +11,7 @@ $tabs = [
     ],
     [
         'title' => 'Video e thumbnail',
-        'link' => '',
+        'link' => !isset($video)?'#':route('admin.videos.uploads.create', ['video' => $video->id]),
         'disabled' => !isset($video)?true:false
     ]
 ];

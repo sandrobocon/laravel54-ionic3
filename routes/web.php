@@ -52,6 +52,8 @@ Route::group([
         Route::group(['prefix' => 'videos', 'as' => 'videos.'], function(){
            Route::name('relations.create')->get('{video}/relations', 'VideoRelationsController@create');
            Route::name('relations.store')->post('{video}/relations', 'VideoRelationsController@store');
+           Route::name('uploads.create')->get('{video}/uploads', 'VideoUploadsController@create');
+           Route::name('uploads.store')->post('{video}/uploads', 'VideoUploadsController@store');
         });
         Route::resource('videos','VideosController');
     });
