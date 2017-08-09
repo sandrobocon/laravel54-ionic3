@@ -61,7 +61,11 @@ class VideoUploadsController extends Controller
                 ->withInput();
         }
 
-        $this->repository->uploadThumb($id,$request->file('thumb'));
+        if($request->file('thumb'))
+            $this->repository->uploadThumb($id,$request->file('thumb'));
+        if($request->file('file'))
+            $this->repository->uploadFile($id,$request->file('file'));
+
         return redirect()->route('admin.videos.uploads.create',['video'=>$id])
             ->with('message','Upload(s) realizado(s) com sucesso.');
     }

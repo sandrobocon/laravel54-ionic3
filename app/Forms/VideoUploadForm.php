@@ -17,7 +17,7 @@ class VideoUploadForm extends Form
         $this->add('file', 'file', [
             'required' => false,
             'label' => 'Arquivo de vídeo',
-            'rules' => 'mimetypes:video/mp4,video/avi,video/mpeg,video/mkv'
+            'rules' => 'mimetypes:video/mp4,video/avi,video/mpeg,video/x-matroska'
         ]);
     }
 }
