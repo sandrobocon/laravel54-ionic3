@@ -36,6 +36,9 @@ trait VideoPaths
 
     public function getFilePathAttribute()
     {
-        return $this->getAbsolutePath($this->getStorage(),$this->file_relative);
+        if($this->file_relative) {
+            return $this->getAbsolutePath($this->getStorage(), $this->file_relative);
+        }
+        return false;
     }
 }
