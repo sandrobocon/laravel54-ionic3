@@ -55,6 +55,7 @@ Route::group([
            Route::name('uploads.create')->get('{video}/uploads', 'VideoUploadsController@create');
            Route::name('uploads.store')->post('{video}/uploads', 'VideoUploadsController@store');
         });
+        Route::name('videos.video_asset')->get('videos/{video}/video_asset', 'VideosController@videoAsset');
         Route::resource('videos','VideosController');
     });
 });

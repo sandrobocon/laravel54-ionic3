@@ -23,6 +23,14 @@ trait VideoStorages
     protected function getAbsolutePath(FilesystemAdapter $storage, $fileRelativePath)
     {
         // "fullPath" + "serie/1/thumb.jpg (fileRelativePath)"
-        return $storage->getDriver()->getAdapter()->applyPathPrefix($fileRelativePath);
+        return $this->isLocalDriver() ?
+            $storage->getDriver()->getAdapter()->applyPathPrefix($fileRelativePath):
+            $storage->url($fileRelativePath);
+    }
+
+    public function isLocalDriver()
+    {
+        $driver = config("filesystems.disks.{$this->getDiskDriver()}.driver");
+        return $driver == 'local';
     }
 }

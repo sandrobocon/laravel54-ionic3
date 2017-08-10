@@ -134,4 +134,9 @@ class VideosController extends Controller
     {
         //
     }
+
+    public function fileAsset(Serie $video)
+    {
+        return response()->download($video->file_path);
+    }
 }

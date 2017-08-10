@@ -14,12 +14,16 @@ trait SeriePaths
 
     public function getThumbAssetAttribute()
     {
-        return route('admin.series.thumb_asset', ['serie'=>$this->id]);
+        return $this->isLocalDriver() ?
+            route('admin.series.thumb_asset', ['serie'=>$this->id]):
+            $this->thumb_path;
     }
 
     public function getThumbSmallAssetAttribute()
     {
-        return route('admin.series.thumb_small_asset', ['serie'=>$this->id]);
+        return $this->isLocalDriver() ?
+            route('admin.series.thumb_small_asset', ['serie'=>$this->id]):
+            $this->thumb_small_path;
     }
 
     public function getThumbDefaultAttribute()
