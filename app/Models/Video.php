@@ -21,6 +21,10 @@ class Video extends Model implements Transformable, TableInterface
         'serie_id'
     ];
 
+    protected $casts = [
+        'completed' => 'bool'
+    ];
+
     public function serie()
     {
         return $this->belongsTo(Serie::class);
