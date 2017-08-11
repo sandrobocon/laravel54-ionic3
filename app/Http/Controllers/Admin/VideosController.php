@@ -81,7 +81,7 @@ class VideosController extends Controller
      */
     public function show(Video $video)
     {
-        //
+        return view('admin.videos.show', compact('video'));
     }
 
     /**
@@ -130,9 +130,10 @@ class VideosController extends Controller
      * @param  \CodeFlix\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
+    public function destroy($id)
     {
-        //
+        $this->repository->delete($id);
+        return redirect()->route('admin.videos.index')->with('message','Video excluido com sucesso.');
     }
 
     public function fileAsset(Serie $video)
