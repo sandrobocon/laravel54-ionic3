@@ -4,12 +4,14 @@ namespace CodeFlix\Models;
 
 use Bootstrapper\Interfaces\TableInterface;
 use CodeFlix\Notifications\DefaultResetPasswordNotification;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements TableInterface
 {
     use Notifiable;
+    use SoftDeletes;
 
     const ROLE_ADMIN = 1;
     const ROLE_CLIENT = 2;

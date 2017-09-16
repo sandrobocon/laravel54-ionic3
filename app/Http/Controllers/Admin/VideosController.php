@@ -136,8 +136,18 @@ class VideosController extends Controller
         return redirect()->route('admin.videos.index')->with('message','Video excluido com sucesso.');
     }
 
-    public function fileAsset(Serie $video)
+    public function fileAsset(Video $video)
     {
         return response()->download($video->file_path);
+    }
+
+    public function thumbAsset(Video $video)
+    {
+        return response()->download($video->thumb_path);
+    }
+
+    public function thumbSmallAsset(Video $video)
+    {
+        return response()->download($video->thumb_small_path);
     }
 }
