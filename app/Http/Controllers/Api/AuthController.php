@@ -34,4 +34,11 @@ class AuthController extends Controller
             'error' => Lang::get('auth.failed')
         ], 400);
     }
+
+    public function logout(Request $request)
+    {
+        \Auth::guard('api')->logout();
+
+        return response()->json([],204); // 204 Ok no content
+    }
 }

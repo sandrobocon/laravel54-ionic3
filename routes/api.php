@@ -35,6 +35,8 @@ ApiRoute::version('v1',function() {
                 'limit' => 100,
                 'expires' => 3
             ], function(){
+                ApiRoute::post('/logout','AuthController@logout');
+
                 ApiRoute::get('/test',function(){
                     return 'oi';
                 });
