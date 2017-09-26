@@ -29,6 +29,12 @@ ApiRoute::version('v1',function() {
                 'limit' => 10, // Qty
                 'expires' => 1 // Time in minutes (10 requests in 1 minute)
             ])->name('.access_token');
+            ApiRoute::post('/refresh_token',[
+                'uses' => 'AuthController@refreshToken',
+                'middleware' => 'api.throttle',
+                'limit' => 10, // Qty
+                'expires' => 1
+            ])->name('.refresh_token');
 
             ApiRoute::group([
                 'middleware' => ['api.throttle', 'api.auth'],
