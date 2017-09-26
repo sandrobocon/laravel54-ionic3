@@ -18,8 +18,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 ApiRoute::version('v1',function() {
-    ApiRoute::group(['namespace'=> 'CodeFlix\Http\Controllers\Api','as' => 'api'], function(){
-        ApiRoute::post('/access_token','AuthController@accessToken')
-            ->name('.access_token');
+
+    ApiRoute::group(
+        ['namespace'=> 'CodeFlix\Http\Controllers\Api',
+            'as' => 'api'
+        ], function(){
+            ApiRoute::post('/access_token',[
+                'uses' => 'AuthController@accessToken',
+                'middleware' => 'api.throttle',
+                'limit' => 10, // Qty
+                'expires' => 1 // Time in minutes (10 requests in 1 minute)
+            ])->name('.access_token');
+
+            ApiRoute::group([
+                'middleware' => 'api.throttle',
+                'limit' => 100,
+                'expires' => 3
+            ], function(){
+                //endpoints that need authentication
+            });
     });
 });
