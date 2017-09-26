@@ -31,11 +31,13 @@ ApiRoute::version('v1',function() {
             ])->name('.access_token');
 
             ApiRoute::group([
-                'middleware' => 'api.throttle',
+                'middleware' => ['api.throttle', 'api.auth'],
                 'limit' => 100,
                 'expires' => 3
             ], function(){
-                //endpoints that need authentication
+                ApiRoute::get('/test',function(){
+                    return 'oi';
+                });
             });
     });
 });

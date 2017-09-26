@@ -169,7 +169,7 @@ return [
     */
 
     'auth' => [
-
+        'jwt' => \CodeFlix\Auth\JWTProvider::class
     ],
 
     /*
