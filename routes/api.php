@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
 ApiRoute::version('v1',function() {
 
@@ -44,7 +44,14 @@ ApiRoute::version('v1',function() {
                 ApiRoute::post('/logout','AuthController@logout');
 
                 ApiRoute::get('/test',function(){
-                    return 'oi';
+                    return 'Opa!! Estou autenticado';
+                });
+
+                ApiRoute::get('/user',function(Request $request) {
+                    // 3 ways to return user loged info
+                    return $request->user('api');
+                    // return app(\Dingo\Api\Auth\Auth::class)->user();
+                    // return Auth::guard('api')->user();
                 });
             });
     });
