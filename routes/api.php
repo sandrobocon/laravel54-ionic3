@@ -53,6 +53,8 @@ ApiRoute::version('v1',function() {
                     // return app(\Dingo\Api\Auth\Auth::class)->user();
                     // return Auth::guard('api')->user();
                 });
+
+                ApiRoute::get('/categories', 'CategoriesController@index');
             });
     });
 });

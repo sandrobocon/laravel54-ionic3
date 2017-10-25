@@ -17,6 +17,10 @@ class Category extends Model implements Transformable, TableInterface
 		'name',
 	];
 
+    protected $hidden = [
+        'deleted_at'
+    ];
+
     /**
      * A list of headers to be used when a table is displayed
      *
