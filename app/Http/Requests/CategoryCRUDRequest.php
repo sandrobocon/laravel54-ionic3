@@ -14,7 +14,7 @@ class CategoryCRUDRequest extends FormRequest
      */
     public function authorize()
     {
-        if(\Auth::user()->role === User::ROLE_ADMIN)
+        if(\Auth::user() and intval(\Auth::user()->role) === User::ROLE_ADMIN)
             return true;
 
         return false;

@@ -3,9 +3,9 @@
 namespace Tests\Browser;
 
 use CodeFlix\Models\User;
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class CategoryTest extends DuskTestCase
 {
@@ -16,7 +16,7 @@ class CategoryTest extends DuskTestCase
      *
      * @return void
      */
-    public function testCreate()
+    public function testCRUD()
     {
         $user = User::where('email','=','admin@user.com')->first();
 
@@ -26,10 +26,54 @@ class CategoryTest extends DuskTestCase
                 ->assertSee('Listagem de categorias')
                 ->clickLink('Nova Categoria')
                 ->assertSee('Nome categoria')
-                ->type('name','test')
+                ->type('name','testCreate')
                     ->click('button[type=submit]')
                 ->assertSee('Listagem de categorias')
-                ->assertSee('test');
+                ->assertSee('testCreate');
+        });
+
+        $this->categoryUpdate();
+        $this->categoryShow();
+        $this->categoryDelete();
+    }
+
+    protected function categoryUpdate()
+    {
+        $user = User::where('email','=','admin@user.com')->first();
+
+        $this->browse(function (Browser $browser) use($user) {
+            $browser->loginAs($user)
+                ->visit(route('admin.categories.edit',['category'=>1]))
+                ->assertSee('Editar categoria')
+                ->type('name','UpdateTestCategory')
+                ->click('button[type=submit]')
+                ->assertSee('Listagem de categorias')
+                ->assertSee('UpdateTestCategory');
+        });
+    }
+
+    protected function categoryShow()
+    {
+        $user = User::where('email','=','admin@user.com')->first();
+
+        $this->browse(function (Browser $browser) use($user) {
+            $browser->loginAs($user)
+                ->visit(route('admin.categories.show',['category'=>1]))
+                ->assertSee('Dados categoria')
+                ->assertSee('UpdateTestCategory');
+        });
+    }
+
+    protected function categoryDelete()
+    {
+        $user = User::where('email','=','admin@user.com')->first();
+
+        $this->browse(function (Browser $browser) use($user) {
+            $browser->loginAs($user)
+                ->visit(route('admin.categories.show',['category'=>1]))
+                ->click('.btn-danger')
+                ->assertSee('Categoria removida')
+                ->assertDontSee('UpdateTestCategory');
         });
     }
 }

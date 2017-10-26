@@ -56,6 +56,24 @@ class LoginTest extends TestCase
         ])->assertStatus(500);
     }
 
+    public function testNotAuthorizedAccessApiCategories()
+    {
+        $this->get('api/categories')
+            ->assertStatus(500);
+    }
+
+    public function testAuthorizedAccessApiCategories()
+    {
+        $testResponse = $this->makeJWTToken();
+        $token = $testResponse->json()['token'];
+
+        $this->get('api/categories', [
+            'Authorization' => "Bearer $token"
+        ])->assertStatus(200);
+
+        $this->clearAuth();
+    }
+
     protected function clearAuth()
     {
         $reflextionClass = new \ReflectionClass(JWTGuard::class);

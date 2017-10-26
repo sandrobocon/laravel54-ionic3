@@ -62,6 +62,6 @@ Route::group([
     });
 });
 
-Route::get('/force-login',function(){
-   \Auth::loginUsingId(1);
-});
+//Route::get('/force-login',function(){
+//   \Auth::loginUsingId(1);
+//});
