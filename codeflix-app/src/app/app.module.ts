@@ -8,10 +8,11 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { Test } from '../components/test/test';
 @NgModule({
   declarations: [
     MyApp,
+    Test,
     HomePage,
     ListPage
   ],
