@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'test',
+  selector: 'test1',
   templateUrl: 'test.html'
 })
 export class Test {

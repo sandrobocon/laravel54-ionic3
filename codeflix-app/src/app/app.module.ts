@@ -24,7 +24,8 @@ import { Test } from '../components/test/test';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    Test
   ],
   providers: [
     StatusBar,
