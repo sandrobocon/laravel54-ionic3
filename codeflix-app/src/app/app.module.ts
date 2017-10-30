@@ -10,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Test } from '../components/test/test';
 @NgModule({
-  declarations: [
+  declarations: [ //Usar componentes via selector
     MyApp,
     Test,
     HomePage,
@@ -21,7 +21,7 @@ import { Test } from '../components/test/test';
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
+  entryComponents: [ // componentes criados dinamicamente (nav)
     MyApp,
     HomePage,
     ListPage,
