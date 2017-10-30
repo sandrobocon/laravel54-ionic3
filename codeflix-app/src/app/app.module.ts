@@ -9,12 +9,14 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Test } from '../components/test/test';
+import {Login} from "../pages/login/login";
 @NgModule({
   declarations: [ //Usar componentes via selector
     MyApp,
     Test,
     HomePage,
-    ListPage
+    ListPage,
+    Login
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { Test } from '../components/test/test';
     MyApp,
     HomePage,
     ListPage,
-    Test
+    Test,
+    Login
   ],
   providers: [
     StatusBar,
