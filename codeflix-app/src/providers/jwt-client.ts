@@ -4,13 +4,9 @@ import 'rxjs/add/operator/map';
 import {JwtCredentials} from "../models/jwt-credentials";
 import {Storage} from "@ionic/storage";
 import {JwtHelper} from "angular2-jwt";
+import {Env} from "../models/env";
 
-/*
-  Generated class for the JwtClient provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+declare var ENV:Env;
 @Injectable()
 export class JwtClient {
 
@@ -43,7 +39,7 @@ export class JwtClient {
       if(this._token){
         resolve(this._token);
       }
-      this.storage.get('token').then((token)=>{
+      this.storage.get(ENV.TOKEN_NAME).then((token)=>{
         this._token = token;
         resolve(this._token);
       });
@@ -51,7 +47,7 @@ export class JwtClient {
   }
 
   accessToken(jwtCredentials: JwtCredentials): Promise<string>{
-    return this.http.post('http://localhost:8000/api/access_token', jwtCredentials)
+    return this.http.post(`${ENV.API_URL}/access_token`, jwtCredentials)
         .toPromise()
         .then((response: Response) => {
           let token = response.json().token;
@@ -65,7 +61,7 @@ export class JwtClient {
     let headers = new Headers();
     headers.set('Authorization',`Bearer ${this._token}`);
     let requestOptions = new RequestOptions({headers});
-    return this.http.post('http://localhost:8000/api/logout',{},requestOptions)
+    return this.http.post(`${ENV.API_URL}/logout`,{},requestOptions)
         .toPromise()
         .then((response: Response) => {
           this._token = null;
