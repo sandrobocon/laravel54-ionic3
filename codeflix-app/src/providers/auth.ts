@@ -26,10 +26,7 @@ export class Auth {
       this.jwtClient.getPayload().then((payload:JwtPayload) => {
         if(payload){
           this._user = payload.user;
-        } else {
-          this._user = null;
         }
-
         resolve(this._user);
       });
     });

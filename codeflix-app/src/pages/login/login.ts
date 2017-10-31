@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from "ionic-angular"
+import {IonicPage, MenuController, NavController, NavParams, ToastController} from "ionic-angular"
 import 'rxjs/add/operator/toPromise';
 import {Auth} from "../../providers/auth";
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the Login page.
@@ -25,8 +26,11 @@ export class LoginPage {
   // password:string;
     constructor(
         public navCtrl: NavController,
+        public menuCtrl: MenuController,
+        public toastCtrl: ToastController,
         public navParams: NavParams,
         private auth: Auth) {
+      this.menuCtrl.enable(false);
   }
 
   ionViewDidLoad() {
@@ -36,12 +40,22 @@ export class LoginPage {
   loginSubmit(){
       this.auth.login(this.user)
           .then(() => {
-            //redirecionar
+            this.afterLogin();
+          })
+          .catch(() => {
+            let toast = this.toastCtrl.create({
+              message: 'Email e/ou senha inválidos.',
+              duration: 3000,
+              position: 'top',
+              cssClass: 'toast-login-error'
+            });
+
+            toast.present();
           });
-    /*this.jwtClient
-        .accessToken({email: this.email, password: this.password})
-        .then((token) => {
-          console.log((token));
-        })*/
+  }
+
+  afterLogin(){
+    this.menuCtrl.enable(true);
+    this.navCtrl.push(HomePage);
   }
 }
