@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from "ionic-angular"
 import 'rxjs/add/operator/toPromise';
-import {JwtClient} from "../../providers/jwt-client";
+import {Auth} from "../../providers/auth";
 
 /**
  * Generated class for the Login page.
@@ -16,12 +16,17 @@ import {JwtClient} from "../../providers/jwt-client";
 })
 export class LoginPage {
 
-  email:string;
-  password:string;
+  user = {
+    email:'',
+    password:''
+  };
+
+  // email:string;
+  // password:string;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private jwtClient: JwtClient) {
+        private auth: Auth) {
   }
 
   ionViewDidLoad() {
@@ -29,10 +34,14 @@ export class LoginPage {
   }
 
   loginSubmit(){
-    this.jwtClient
+      this.auth.login(this.user)
+          .then(() => {
+            //redirecionar
+          });
+    /*this.jwtClient
         .accessToken({email: this.email, password: this.password})
         .then((token) => {
           console.log((token));
-        })
+        })*/
   }
 }

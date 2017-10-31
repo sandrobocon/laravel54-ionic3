@@ -14,6 +14,7 @@ import {HttpModule} from "@angular/http";
 import {JwtClient} from "../providers/jwt-client";
 import {IonicStorageModule} from "@ionic/storage";
 import {JwtHelper} from "angular2-jwt";
+import {Auth} from "../providers/auth";
 @NgModule({
   declarations: [ //Usar componentes via selector
     MyApp,
@@ -43,6 +44,7 @@ import {JwtHelper} from "angular2-jwt";
     SplashScreen,
     JwtClient,
     JwtHelper,
+    Auth,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
