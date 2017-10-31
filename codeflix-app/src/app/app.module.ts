@@ -11,6 +11,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Test } from '../components/test/test';
 import { LoginPage } from "../pages/login/login";
 import {HttpModule} from "@angular/http";
+import {JwtClient} from "../providers/jwt-client";
+import {IonicStorageModule} from "@ionic/storage";
 @NgModule({
   declarations: [ //Usar componentes via selector
     MyApp,
@@ -23,6 +25,9 @@ import {HttpModule} from "@angular/http";
     HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot({
+      driverOrder: ['localstorage']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [ // componentes criados dinamicamente (nav)
@@ -35,6 +40,7 @@ import {HttpModule} from "@angular/http";
   providers: [
     StatusBar,
     SplashScreen,
+    JwtClient,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
