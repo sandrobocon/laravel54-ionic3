@@ -3,7 +3,7 @@ import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {JwtCredentials} from "../models/jwt-credentials";
 import {Storage} from "@ionic/storage";
-import {JwtHelper} from "angular2-jwt";
+import {AuthHttp, JwtHelper} from "angular2-jwt";
 import {Env} from "../models/env";
 
 declare var ENV:Env;
@@ -14,7 +14,7 @@ export class JwtClient {
   private _payload = null;
 
   constructor(
-      public http: Http,
+      public authHttp: AuthHttp,
       public storage:Storage,
       public jwtHelper:JwtHelper) {
     this.getToken();
@@ -47,7 +47,7 @@ export class JwtClient {
   }
 
   accessToken(jwtCredentials: JwtCredentials): Promise<string>{
-    return this.http.post(`${ENV.API_URL}/access_token`, jwtCredentials)
+    return this.authHttp.post(`${ENV.API_URL}/access_token`, jwtCredentials)
         .toPromise()
         .then((response: Response) => {
           let token = response.json().token;
@@ -61,7 +61,7 @@ export class JwtClient {
     let headers = new Headers();
     headers.set('Authorization',`Bearer ${this._token}`);
     let requestOptions = new RequestOptions({headers});
-    return this.http.post(`${ENV.API_URL}/logout`,{},requestOptions)
+    return this.authHttp.post(`${ENV.API_URL}/logout`,{},requestOptions)
         .toPromise()
         .then((response: Response) => {
           this._token = null;
