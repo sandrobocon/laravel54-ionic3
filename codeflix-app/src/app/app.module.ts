@@ -18,6 +18,7 @@ import {Auth} from "../providers/auth";
 import {Env} from "../models/env";
 import {DefaultXHRBackend} from "../providers/default-xhr-backend";
 import {Redirector} from "../providers/redirector";
+import {Facebook} from "@ionic-native/facebook";
 
 declare var ENV:Env;
 
@@ -58,6 +59,7 @@ declare var ENV:Env;
     JwtHelper,
     Auth,
     Redirector,
+    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {
       provide: AuthHttp,

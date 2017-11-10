@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {JwtClient} from "./jwt-client";
 import {JwtPayload} from "../models/jwt-payload";
+import {Facebook, FacebookLoginResponse} from "@ionic-native/facebook";
 
 /*
   Generated class for the Auth provider.
@@ -14,7 +15,7 @@ export class Auth {
 
   private _user = null;
 
-  constructor(public jwtClient: JwtClient) {
+  constructor(public jwtClient: JwtClient, public fb:Facebook) {
     console.log('Hello Auth Provider');
   }
 
@@ -42,6 +43,13 @@ export class Auth {
     return this.jwtClient.accessToken({email,password})
         .then(() => {
           return this.user();
+        });
+  }
+
+  loginFacebook(){
+    this.fb.login(['email'])
+        .then((response: FacebookLoginResponse) => {
+          console.log(response);
         });
   }
 
