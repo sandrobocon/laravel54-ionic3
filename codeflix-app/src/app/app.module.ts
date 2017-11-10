@@ -10,12 +10,14 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {Test} from '../components/test/test';
 import {LoginPage} from "../pages/login/login";
-import {Http, HttpModule} from "@angular/http";
+import {Http, HttpModule, XHRBackend} from "@angular/http";
 import {JwtClient} from "../providers/jwt-client";
 import {IonicStorageModule, Storage} from "@ionic/storage";
 import {AuthConfig, AuthHttp, JwtHelper} from "angular2-jwt";
 import {Auth} from "../providers/auth";
 import {Env} from "../models/env";
+import {DefaultXHRBackend} from "../providers/default-xhr-backend";
+import {Redirector} from "../providers/redirector";
 
 declare var ENV:Env;
 
@@ -55,6 +57,7 @@ declare var ENV:Env;
     JwtClient,
     JwtHelper,
     Auth,
+    Redirector,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {
       provide: AuthHttp,
@@ -68,7 +71,8 @@ declare var ENV:Env;
         });
         return new AuthHttp(authConfig,http)
       }
-    }
+    },
+    {provide: XHRBackend, useClass: DefaultXHRBackend},
   ]
 })
 export class AppModule {}
