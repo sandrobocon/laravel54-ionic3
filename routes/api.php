@@ -35,6 +35,7 @@ ApiRoute::version('v1',function() {
                 'limit' => 10, // Qty
                 'expires' => 1
             ])->name('.refresh_token');
+            ApiRoute::post('register','RegisterUserController@store');
 
             ApiRoute::group([
                 'middleware' => ['api.throttle', 'api.auth'],
@@ -46,7 +47,6 @@ ApiRoute::version('v1',function() {
                 ApiRoute::get('/test',function(){
                     return 'Opa!! Estou autenticado';
                 });
-
                 ApiRoute::get('/user',function(Request $request) {
                     // 3 ways to return user loged info
                     return $request->user('api');

@@ -15,7 +15,6 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
     public function create(array $attributes)
     {
-        $attributes['role'] = User::ROLE_ADMIN;
         $attributes['password'] = User::generatePassword();
         $model = parent::create($attributes);
         UserVerification::generate($model);
